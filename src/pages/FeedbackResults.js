@@ -81,6 +81,7 @@ const FeedbackResults = () => {
 									label: `Responses for ${questions[questionIndex]}`,
 									data: values,
 									backgroundColor: [
+										'rgba(186, 33, 0, 1.0)',
 										'rgba(255, 77, 38, 1.0)',
 										'rgba(255, 142, 38, 1.0)',
 										'rgba(255, 181, 38, 1.0)',
@@ -136,10 +137,10 @@ const FeedbackResults = () => {
 									label: 'Checkbox Responses',
 									data: values,
 									backgroundColor: [
+										'rgba(186, 33, 0, 1.0)',
 										'rgba(255, 77, 38, 1.0)',
 										'rgba(255, 142, 38, 1.0)',
 										'rgba(255, 181, 38, 1.0)',
-										'rgba(255, 227, 174, 1.0)',
 									],
 								},
 							],
