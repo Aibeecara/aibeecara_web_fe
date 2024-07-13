@@ -69,7 +69,7 @@ const FeedbackResults = () => {
 		const values = Object.values(stats)
 
 		return (
-			<div className="my-4 p-4 bg-[#FFE3AE] rounded-2xl shadow-md border-2 border-[#FFB526]">
+			<div className="my-4 p-4 bg-gradient-to-b from-[#FFE3AE] to-[#FFF3DC] rounded-2xl shadow-md border-2 border-[#FFB526]">
 				<h3 className="text-lg font-bold mb-2">{questions[questionIndex]}</h3>
 				<p className="text-sm">Total Responses: {totalResponses}</p>
 				<div className="relative h-64 w-full">
@@ -124,8 +124,7 @@ const FeedbackResults = () => {
 		const values = Object.values(checkboxCounts)
 
 		return (
-			<div className="my-4 p-4 bg-[#FFE3AE] rounded-2xl shadow-md border-2 border-[#FFB526]">
-        <h2 className="text-2xl font-bold mb-4 text-center">Checkbox Answer Responses</h2>
+			<div className="my-4 p-4 bg-gradient-to-b from-[#FFE3AE] to-[#FFF3DC] rounded-2xl shadow-md border-2 border-[#FFB526]">
 				<h3 className="text-lg font-bold mb-2">{checkboxQuestions[0]}</h3>
 				<p className="text-sm">Total Responses: {totalResponses}</p>
 				<div className="relative h-64 w-full">
@@ -174,11 +173,10 @@ const FeedbackResults = () => {
 			(_, index) => `longAnswer${index + 1}`
 		)
 		return (
-			<div className="p-4 bg-[#FFE3AE] rounded-2xl shadow-md border-2 border-[#FFB526]">
-				<h2 className="text-2xl font-bold mb-4 text-center">Long Answer Responses</h2>
+			<div className="p-4 bg-gradient-to-b from-[#FFE3AE] to-[#FFF3DC] rounded-2xl shadow-md border-2 border-[#FFB526]">
 				{longAnswerKeys.map((key, index) => (
-					<div key={key} className="mb-4">
-						<h4 className="font-semibold">{longAnswerQuestions[index]}</h4>
+					<div key={key} className="mb-5">
+						<h4 className="font-semibold mb-2">{longAnswerQuestions[index]}</h4>
 						{data.map((feedback, index) => (
 							<p
 								className="border-2 rounded-xl bg-white p-2 mb-2"
@@ -206,7 +204,7 @@ const FeedbackResults = () => {
 					{renderLongAnswers()}
 				</div>
 			) : (
-				<p className="text-center mt-4 px-4 py-2 bg-[#FFE3AE] border-2 rounded-xl border-[#FFB526]">Tidak ada satupun responden!</p>
+				<p className="text-center mt-4 px-4 py-2 bg-gradient-to-b from-[#FFE3AE] to-[#FFF3DC] border-2 rounded-xl border-[#FFB526]">Tidak ada satupun responden!</p>
 			)}
 		</div>
 	)
