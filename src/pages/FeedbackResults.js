@@ -71,7 +71,7 @@ const FeedbackResults = () => {
 		return (
 			<div className="my-4 p-4 bg-gradient-to-b from-[#FFE3AE] to-[#FFF3DC] rounded-2xl shadow-md border-2 border-[#FFB526]">
 				<h3 className="text-lg font-bold mb-2">{questions[questionIndex]}</h3>
-				<p className="text-sm">Total Responses: {totalResponses}</p>
+				<p className="text-sm">Jumlah Responden: {totalResponses}</p>
 				<div className="relative h-64 w-full">
 					<Doughnut
 						data={{
@@ -81,10 +81,10 @@ const FeedbackResults = () => {
 									label: `Responses for ${questions[questionIndex]}`,
 									data: values,
 									backgroundColor: [
-										'rgba(186, 33, 0, 1.0)',
-										'rgba(255, 77, 38, 1.0)',
-										'rgba(255, 142, 38, 1.0)',
 										'rgba(255, 181, 38, 1.0)',
+										'rgba(255, 142, 38, 1.0)',
+										'rgba(255, 77, 38, 1.0)',
+										'rgba(186, 33, 0, 1.0)',
 									],
 								},
 							],
@@ -126,7 +126,7 @@ const FeedbackResults = () => {
 		return (
 			<div className="my-4 p-4 bg-gradient-to-b from-[#FFE3AE] to-[#FFF3DC] rounded-2xl shadow-md border-2 border-[#FFB526]">
 				<h3 className="text-lg font-bold mb-2">{checkboxQuestions[0]}</h3>
-				<p className="text-sm">Total Responses: {totalResponses}</p>
+				<p className="text-sm">Jumlah Responden: {totalResponses}</p>
 				<div className="relative h-64 w-full">
 					<Doughnut
 						data={{
@@ -136,10 +136,10 @@ const FeedbackResults = () => {
 									label: 'Checkbox Responses',
 									data: values,
 									backgroundColor: [
-										'rgba(186, 33, 0, 1.0)',
-										'rgba(255, 77, 38, 1.0)',
-										'rgba(255, 142, 38, 1.0)',
 										'rgba(255, 181, 38, 1.0)',
+										'rgba(255, 142, 38, 1.0)',
+										'rgba(255, 77, 38, 1.0)',
+										'rgba(186, 33, 0, 1.0)',
 									],
 								},
 							],
@@ -176,7 +176,7 @@ const FeedbackResults = () => {
 			<div className="p-4 bg-gradient-to-b from-[#FFE3AE] to-[#FFF3DC] rounded-2xl shadow-md border-2 border-[#FFB526]">
 				{longAnswerKeys.map((key, index) => (
 					<div key={key} className="mb-5">
-						<h4 className="font-semibold mb-2">{longAnswerQuestions[index]}</h4>
+						<h4 className="text-lg font-bold mb-2">{longAnswerQuestions[index]}</h4>
 						{data.map((feedback, index) => (
 							<p
 								className="border-2 rounded-xl bg-white p-2 mb-2"
@@ -192,7 +192,7 @@ const FeedbackResults = () => {
 	}
 
 	return (
-		<div className=" p-4 bg-white mt-10">
+		<div className="m-4 md:m-10 p-4 bg-white mt-10">
       <Navbar />
 			<h1 className="text-2xl font-bold mt-4 text-center">Hasil Feedback</h1>
 			{totalResponses > 0 ? (
