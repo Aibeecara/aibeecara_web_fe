@@ -246,7 +246,7 @@ const Home = () => {
         <span className='flex items-center justify-center text-white text-9xl font-normal'>beecara</span>
 
         <Helmet>
-          <title>Home - Beecara</title>
+          <title>Home | aibeecara</title>
         </Helmet>
       </div>
     </>
