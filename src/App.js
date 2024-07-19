@@ -5,6 +5,7 @@ import Footer from './pages/Footer'
 import ComingSoon from './pages/ComingSoon'
 import Contact from './pages/Contact'
 import './App.css'
+import QRCodeGenerator from './pages/QRCode'
 
 function App() {
 	return (
@@ -13,7 +14,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<LandingPage />} />
 				<Route path="*" element={<ComingSoon />} />
-				{/* <Route path="/contact" element={<Contact />} /> */}
+				{/* <Route path="/contact" element={<QRCodeGenerator />} /> */}
 			</Routes>
 			<Footer />
 

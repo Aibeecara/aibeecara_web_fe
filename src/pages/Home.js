@@ -35,7 +35,7 @@ const Home = () => {
 	const handleDownload = () => {
 		const link = document.createElement('a')
 		link.href =
-			'https://firebasestorage.googleapis.com/v0/b/aibeecara-firebase.appspot.com/o/beecara-text.rar?alt=media&token=c036a3c1-2fe3-461a-9ceb-f3ead61cd88c';
+			'https://firebasestorage.googleapis.com/v0/b/aibeecara-firebase.appspot.com/o/beecara-text.rar?alt=media&token=c036a3c1-2fe3-461a-9ceb-f3ead61cd88c'
 		link.download = 'beecara-text.rar' // Nama file saat diunduh
 		document.body.appendChild(link)
 		link.click()
@@ -47,7 +47,7 @@ const Home = () => {
 		<div
 			className="relative flex flex-col items-center justify-center min-h-screen p-6 bg-[#FFB526] bg-cover bg-center font-baloobhaijaan2"
 			style={{ backgroundImage: `url(${imageBG})` }}
-			id='home'
+			id="home"
 		>
 			<div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
 			<div className="relative z-10 text-center flex flex-col items-center">
@@ -103,13 +103,6 @@ const Home = () => {
 				</motion.p> */}
 			</div>
 
-			<Helmet>
-				<title>
-					Fun & Effective Language Learning through Virtual Adventures |
-					aibeecara
-				</title>
-			</Helmet>
-
 			{isOpen && (
 				<motion.div
 					className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-5"
@@ -154,51 +147,66 @@ const Home = () => {
 
 			<style>
 				{`
-  .scroll-down {
-    height: 50px;
-    width: 30px;
-    border: 2px solid #fff;
-    border-radius: 50px;
-    cursor: pointer;
-    position: relative;
-    margin-top: 10px; /* Adjust margin to space from the text */
-  }
+				.scroll-down {
+					height: 50px;
+					width: 30px;
+					border: 2px solid #fff;
+					border-radius: 50px;
+					cursor: pointer;
+					position: relative;
+					margin-top: 10px; /* Adjust margin to space from the text */
+				}
 
-  .scroll-down::before,
-  .scroll-down::after {
-    content: '';
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    border: 2px solid #fff;
-    height: 10px;
-    width: 10px;
-    transform: translate(-50%, -100%) rotate(45deg);
-    border-top: transparent;
-    border-left: transparent;
-    animation: scrollDown 1s ease-in-out infinite;
-  }
-  .scroll-down::after {
-    top: 30%;
-    animation-delay: .3s;
-  }
-  @keyframes scrollDown {
-    0% {
-      opacity: 0;
-    }
-    30% {
-      opacity: 1;
-    }
-    60% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-      top: 90%;
-    }
-  }
-  `}
+				.scroll-down::before,
+				.scroll-down::after {
+					content: '';
+					position: absolute;
+					top: 20%;
+					left: 50%;
+					border: 2px solid #fff;
+					height: 10px;
+					width: 10px;
+					transform: translate(-50%, -100%) rotate(45deg);
+					border-top: transparent;
+					border-left: transparent;
+					animation: scrollDown 1s ease-in-out infinite;
+				}
+				.scroll-down::after {
+					top: 30%;
+					animation-delay: .3s;
+				}
+				@keyframes scrollDown {
+					0% {
+						opacity: 0;
+					}
+					30% {
+						opacity: 1;
+					}
+					60% {
+						opacity: 1;
+					}
+					100% {
+						opacity: 0;
+						top: 90%;
+					}
+				}
+				`}
 			</style>
+			<Helmet>
+				<title>
+					Fun & Effective Language Learning through Virtual Adventures |
+					aibeecara
+				</title>
+				<meta
+					name="description"
+					content="Aibeecara adalah platform pembelajaran bahasa asing yang inovatif dengan karakter virtual. Tingkatkan keterampilan bahasa Anda melalui pengalaman belajar interaktif dan menyenangkan dengan teman-teman virtual yang cerdas."
+				/>
+
+				<meta
+					name="keywords"
+					content="pembelajaran bahasa asing, belajar bahasa Inggris, aibeecara, latih bahasa, belajar bahasa, latih inggris, latihan berbahsa asing, karakter virtual AI, AI, bahasa asing, inggris, karakter virtual, aplikasi bahasa, belajar bahasa online, pembelajaran interaktif, aplikasi edukasi, aplikasi belajar, aplikasi belajar dengan AI karakter"
+				/>
+			</Helmet>
 		</div>
 	)
 }
