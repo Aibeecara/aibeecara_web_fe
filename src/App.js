@@ -1,20 +1,23 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import NavBar from './components/NavBar';
-import LandingPage from './pages/LandingPage';
-import Footer from './pages/Footer';
-import ComingSoon from './pages/ComingSoon';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import NavBar from './components/NavBar'
+import LandingPage from './pages/LandingPage'
+import Footer from './pages/Footer'
+import ComingSoon from './pages/ComingSoon'
+import Contact from './pages/Contact'
+import './App.css'
 
 function App() {
-  return (
-    <Router>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="*" element={<ComingSoon />} />
-      </Routes>
-      <Footer />
+	return (
+		<Router>
+			<NavBar />
+			<Routes>
+				<Route path="/" element={<LandingPage />} />
+				<Route path="*" element={<ComingSoon />} />
+				{/* <Route path="/contact" element={<Contact />} /> */}
+			</Routes>
+			<Footer />
 
-      <style>
+			<style>
 				{`
         /* Style untuk scrollbar */
         ::-webkit-scrollbar {
@@ -38,8 +41,8 @@ function App() {
         }
         `}
 			</style>
-    </Router>
-  );
+		</Router>
+	)
 }
 
-export default App;
+export default App

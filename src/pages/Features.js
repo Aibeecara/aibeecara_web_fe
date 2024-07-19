@@ -43,7 +43,7 @@ const Features = () => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
-    <div className="relative bg-gradient-to-b from-gray-50 to-[#FFB526] py-16 font-baloobhaijaan2 overflow-hidden">
+    <div className="relative bg-gradient-to-b from-gray-50 to-[#FFB526] py-16 font-baloobhaijaan2 overflow-hidden" id='features'>
       <div
         className="absolute inset-0 bg-cover bg-center opacity-10 z-0"
         style={{ backgroundImage: `url(${patternImage})` }}

@@ -47,6 +47,7 @@ const Home = () => {
 		<div
 			className="relative flex flex-col items-center justify-center min-h-screen p-6 bg-[#FFB526] bg-cover bg-center font-baloobhaijaan2"
 			style={{ backgroundImage: `url(${imageBG})` }}
+			id='home'
 		>
 			<div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
 			<div className="relative z-10 text-center flex flex-col items-center">
