@@ -1,143 +1,171 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { FaUserCircle, FaSignInAlt } from 'react-icons/fa';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import aibeecaraText from '../assets/TextAibeecaraOnly.png';
-import aibeecaraLogo from '../assets/IconAibeecaraOnly.png';
+import React, { useState, useEffect } from 'react'
+import { FaBars, FaDownload, FaTimes } from 'react-icons/fa'
+import { motion } from 'framer-motion'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { useLocation } from 'react-router-dom'
+import aibeecaraText from '../assets/TextAibeecaraOnly.png'
+import aibeecaraLogo from '../assets/IconAibeecaraOnly.png'
+import { MdOutlineFileDownload } from 'react-icons/md'
+import { BsAndroid } from 'react-icons/bs'
 
-const NavBar = ({ hideNavBar }) => {
-  const [user, setUser] = useState(null);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+const menuVariants = {
+	open: {
+		opacity: 1,
+		pointerEvents: 'auto',
+		transition: { duration: 0.3 },
+	},
+	closed: {
+		opacity: 0,
+		pointerEvents: 'none',
+		transition: { duration: 0.3 },
+	},
+}
 
-  const storedLanguage = localStorage.getItem('language') || 'en';
-  const [language, setLanguage] = useState(storedLanguage);
+const itemVariants = {
+	hidden: { opacity: 0, y: 20 },
+	visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+}
 
-  useEffect(() => {
-    localStorage.setItem('language', language);
-  }, [language]);
+function MobileMenu({ isOpen, onToggle, pathname }) {
+	return (
+		<motion.div
+			className="fixed top-0 left-0 right-0 bottom-0 z-50 text-lg"
+			style={{
+				backgroundColor: 'rgba(255, 255, 255, 0.8)',
+				backdropFilter: 'blur(10px)',
+			}}
+			initial="closed"
+			animate={isOpen ? 'open' : 'closed'}
+			variants={menuVariants}
+		>
+			<div className="flex justify-between p-5">
+				<button onClick={onToggle}>
+					<FaTimes style={{ color: 'black' }} />
+				</button>
+			</div>
+			<ul className="flex flex-col items-center justify-center h-full space-y-8">
+				{['Home', 'Features', 'Contact', 'About'].map((item) => {
+					const itemPath = item === 'Home' ? '/' : `/${item.toLowerCase()}`
+					return (
+						<motion.li
+							key={item}
+							variants={itemVariants}
+							initial="hidden"
+							animate="visible"
+						>
+							<a
+								href={itemPath}
+								className={`px-4 py-2 font-semibold ${
+									pathname === itemPath
+										? 'bg-gradient-to-r from-[#FFB526] to-[#FF8E26] text-white font-semibold'
+										: ''
+								} rounded-full`}
+								onClick={onToggle}
+							>
+								{item}
+							</a>
+						</motion.li>
+					)
+				})}
+				{/* Mobile Download Button */}
+				<motion.li
+					variants={itemVariants}
+					initial="hidden"
+					animate="visible"
+					className="w-full flex justify-center items-center absolute bottom-8"
+				>
+					<button className="px-4 py-2 bg-gradient-to-r from-[#FFB526] to-[#FF8E26] hover:bg-[#d4a13b] rounded-full text-lg font-bold text-white cursor-pointer transition-all duration-300 flex items-center">
+						Download
+            <BsAndroid size={20} className="ml-2" />
+					</button>
+				</motion.li>
+			</ul>
+		</motion.div>
+	)
+}
 
-  const handleSignOut = () => {
-    setUser(null);
-  };
+export default function Navbar() {
+	const [isMenuOpen, setMenuOpen] = useState(false)
+	const location = useLocation()
+	const pathname = location.pathname
 
-  const translations = {
-    en: {
-      home: 'Home',
-      explore: 'Explore',
-      contact: 'Contact',
-      game: 'Game',
-      login: 'Login',
-      language: 'Language',
-      signOut: 'Sign Out',
-    },
-    id: {
-      home: 'Beranda',
-      explore: 'Jelajahi',
-      contact: 'Kontak',
-      game: 'Permainan',
-      login: 'Masuk',
-      language: 'Bahasa',
-      signOut: 'Keluar',
-    },
-  };
+	const handleMenuToggle = () => {
+		setMenuOpen(!isMenuOpen)
+	}
 
-  const handleMouseEnter = () => {
-    setIsDropdownOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsDropdownOpen(false);
-  };
-
-  const handleLanguageChange = (e) => {
-    setLanguage(e.target.value);
-    localStorage.setItem('language', e.target.value);
-    window.location.reload();
-  };
-
-  return (
-    <>
-      <nav className={`${window.location.pathname === '/login' ? 'hidden' : ''} px-20 bg-opacity-90 backdrop-blur-[4px] bg-white p-2 py-5 justify-between flex items-center fixed top-0 left-0 right-0  w-full z-50 shadow-lg`}>
-        <div className="cursor-pointer z-50 flex flex-row items-center justify-start gap-0">
-          <a href="https://aibeecara.id/" className='flex flex-row gap-3 items-center'>
-            <LazyLoadImage src={aibeecaraLogo} alt="logo-beecara" className="w-8 cursor-pointer" />
-            <LazyLoadImage src={aibeecaraText} alt="logo-beecara" className="w-28 cursor-pointer" />
-          </a>
-        </div>
-        <div className="flex items-center justify-end">
-          <ul className="flex space-x-[60px] items-center justify-end font-semibold text-xl">
-            <li>
-              <span className='flex gap-2 items-center hover:text-[#FF8526] transition-all duration-300'>
-                {window.location.pathname === '/explore' ? translations['en'].explore : <a href="/explore">{translations[language].explore}</a>}
-              </span>
-            </li>
-            <li>
-              <span className='flex gap-2 items-center hover:text-[#FF8526] transition-all duration-300'>
-                {window.location.pathname === '/contact' ? translations['en'].contact : <a href="/contact">{translations[language].contact}</a>}
-              </span>
-            </li>
-            <li>
-              <span className='flex gap-2 items-center hover:text-[#FF8526] transition-all duration-300'>
-                {window.location.pathname === '/game' ? translations['en'].game : <a href="/game">{translations[language].game}</a>}
-              </span>
-            </li>
-            {user ?
-            <span onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} ref={dropdownRef} className='-mb-2'>
-              <button type="button" className="cursor-pointer outline-none" id="userMenuButton" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-                <FaUserCircle className={`text-4xl text-black`} />
-              </button>
-              <div
-                className={`${
-                  isDropdownOpen
-                    ? 'opacity-100 scale-100 visible'
-                    : 'opacity-0 scale-95 invisible'
-                } flex flex-col p-2 gap-2 transform transition-all duration-300 origin-top-right absolute right-20 top-20 border-zinc-200 border-2 w-64 rounded-xl shadow-2xl bg-white`}
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="userMenuButton"
-              >
-                <div className='flex px-2 gap-6 flex-row items-center justify-between text-lg'>
-                  <span className={`font-semibold text-black`}>
-                    {translations[language].language}
-                  </span>
-                  <select onChange={handleLanguageChange} value={language} className={`bg-white hover:bg-zinc-200 text-black outline-none px-2 py-2 w-fit cursor-pointer border-none text-right rounded-xl`} role="menuitem">
-                    <option value="en">{language === 'en' ? 'English' : 'Inggris'}</option>
-                    <option value="id">{language === 'en' ? 'Indonesian' : 'Indonesia'}</option>
-                  </select>
-                </div>
-                <button className={`border-red-400 border-2 w-full flex px-4 gap-6 flex-row items-center justify-between hover:bg-red-600 transition-all duration-300 bg-red-500 py-2 text-lg rounded-lg shadow-2xl text-white`} onClick={handleSignOut}>
-                  <span>{translations[language].signOut}</span>
-                  <FaSignInAlt />
-                </button>
-              </div>
-            </span>
-            : 
-            <li>
-              <span className='flex gap-2 items-center hover:text-[#FF8526] transition-all duration-300 text-[#FF8526]'>
-                {window.location.pathname === '/login' ? translations['en'].login : <a href="/login">{translations['en'].login}</a>}
-              </span>
-            </li>
-            }
-          </ul>
-        </div>
-      </nav>
-  
-      <style>
-        {`
-          @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-          .focus {
-            width: 250px;
-          }
-
-          .font-baloo-bhaijaan {
-            font-family: 'Baloo Bhaijaan', sans-serif;
-            font-size: 30px;
-            letter-spacing: 0.1rem;
-          }
-        `}
-      </style>
-    </>
-  );
-};
-
-export default NavBar;
+	return (
+		<motion.div
+			style={{ backgroundColor: '#ffffff' }}
+			className="rounded-[25px] fixed top-[24px] left-[24px] right-[24px] border-2 z-50 font-baloobhaijaan2 font-normal text-lg shadow-lg"
+			initial={{ y: -100, opacity: 0 }}
+			animate={{ y: 0, opacity: 1 }}
+			transition={{ duration: 0.5 }}
+		>
+			<div className="flex justify-between items-center px-5 py-4">
+				<a href="/" className="flex flex-row gap-3 items-center">
+					<LazyLoadImage
+						src={aibeecaraLogo}
+						alt="logo-beecara"
+						className="w-8 cursor-pointer"
+					/>
+					<LazyLoadImage
+						src={aibeecaraText}
+						alt="logo-beecara"
+						className="w-28 cursor-pointer"
+					/>
+				</a>
+				<ul
+					className="hidden md:flex space-x-8 justify-center absolute items-center transition-all"
+					style={{ right: '50%', transform: 'translateX(50%)' }}
+				>
+					{['Home', 'Features', 'Contact', 'About'].map((item) => {
+						const itemPath = item === 'Home' ? '/' : `/${item.toLowerCase()}`
+						return (
+							<motion.li
+								key={item}
+								initial="hidden"
+								animate="visible"
+								variants={itemVariants}
+							>
+								<a
+									href={itemPath}
+									className={`transition-all hover:font-semibold hover:cursor-pointer ${
+										pathname === itemPath
+											? 'bg-gradient-to-r from-[#FFB526] to-[#FF8E26] rounded-full px-4 py-2 text-white font-semibold'
+											: ''
+									}`}
+								>
+									{item}
+								</a>
+							</motion.li>
+						)
+					})}
+				</ul>
+				<div className="hidden md:flex items-center">
+					{/* Desktop Download Button */}
+					<button className="px-4 py-2 bg-gradient-to-r from-[#FFB526] to-[#FF8E26] hover:bg-[#d4a13b] rounded-full text-lg font-bold text-white cursor-pointer transition-all duration-300 flex items-center">
+						Download
+            <BsAndroid size={20} className="ml-2" />
+					</button>
+				</div>
+				<div className="flex items-center md:hidden">
+					<button
+						className="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 rounded-full text-xl p-2"
+						onClick={handleMenuToggle}
+					>
+						{isMenuOpen ? (
+							<FaTimes style={{ color: 'black' }} />
+						) : (
+							<FaBars style={{ color: 'black' }} />
+						)}
+					</button>
+				</div>
+			</div>
+			<MobileMenu
+				isOpen={isMenuOpen}
+				onToggle={handleMenuToggle}
+				pathname={pathname}
+			/>
+		</motion.div>
+	)
+}
