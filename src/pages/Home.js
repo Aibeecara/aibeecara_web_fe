@@ -32,6 +32,17 @@ const Home = () => {
 	const openModal = () => setIsOpen(true)
 	const closeModal = () => setIsOpen(false)
 
+	const handleDownload = () => {
+		const link = document.createElement('a')
+		link.href =
+			'https://github.com/rigelra15/aibeecara-download-app/raw/main/beecara-text.rar' // Ganti dengan URL unduh gambar Anda
+		link.download = 'beecara-text.rar' // Nama file saat diunduh
+		document.body.appendChild(link)
+		link.click()
+		document.body.removeChild(link)
+		closeModal()
+	}
+
 	return (
 		<div
 			className="relative flex flex-col items-center justify-center min-h-screen p-6 bg-[#FFB526] bg-cover bg-center font-baloobhaijaan2"
@@ -129,14 +140,12 @@ const Home = () => {
 							towards effective language learning.
 						</p>
 						<div className="flex justify-center">
-							<a
-								href="https://github.com/rigelra15/aibeecara-download-app/raw/main/beecara-text.rar" // Ganti dengan link unduh aplikasi Anda
+							<button
+								onClick={handleDownload}
 								className="bg-[#FFB526] text-white px-6 py-3 rounded-full font-bold shadow-lg transition-transform duration-300 hover:scale-105"
-								onClick={closeModal}
-								download="beecara-text.rar"
 							>
 								Download Now
-							</a>
+							</button>
 						</div>
 					</motion.div>
 				</motion.div>

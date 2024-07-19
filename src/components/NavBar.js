@@ -27,10 +27,21 @@ const itemVariants = {
 }
 
 function MobileMenu({ isOpen, onToggle, pathname }) {
-  const [isOpenPopUp, setIsOpenPopUp] = useState(false)
+	const [isOpenPopUp, setIsOpenPopUp] = useState(false)
 
 	const openModal = () => setIsOpenPopUp(true)
 	const closeModal = () => setIsOpenPopUp(false)
+
+	const handleDownload = () => {
+		const link = document.createElement('a')
+		link.href =
+			'https://github.com/rigelra15/aibeecara-download-app/raw/main/beecara-text.rar' // Ganti dengan URL unduh gambar Anda
+		link.download = 'beecara-text.rar' // Nama file saat diunduh
+		document.body.appendChild(link)
+		link.click()
+		document.body.removeChild(link)
+		closeModal()
+	}
 
 	return (
 		<motion.div
@@ -89,7 +100,7 @@ function MobileMenu({ isOpen, onToggle, pathname }) {
 				</motion.li>
 			</ul>
 
-      {isOpenPopUp && (
+			{isOpenPopUp && (
 				<motion.div
 					className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-5"
 					initial={{ opacity: 0 }}
@@ -120,14 +131,12 @@ function MobileMenu({ isOpen, onToggle, pathname }) {
 							towards effective language learning.
 						</p>
 						<div className="flex justify-center">
-							<a
-								href="https://github.com/rigelra15/aibeecara-download-app/raw/main/beecara-text.rar" // Ganti dengan link unduh aplikasi Anda
+							<button
+								onClick={handleDownload}
 								className="bg-[#FFB526] text-white px-6 py-3 rounded-full font-bold shadow-lg transition-transform duration-300 hover:scale-105"
-								onClick={closeModal}
-								download="beecara-text.rar"
 							>
 								Download Now
-							</a>
+							</button>
 						</div>
 					</motion.div>
 				</motion.div>
@@ -149,6 +158,17 @@ export default function Navbar() {
 
 	const openModal = () => setIsOpen(true)
 	const closeModal = () => setIsOpen(false)
+
+	const handleDownload = () => {
+		const link = document.createElement('a')
+		link.href =
+			'https://github.com/rigelra15/aibeecara-download-app/raw/main/beecara-text.rar' // Ganti dengan URL unduh gambar Anda
+		link.download = 'beecara-text.rar' // Nama file saat diunduh
+		document.body.appendChild(link)
+		link.click()
+		document.body.removeChild(link)
+		closeModal()
+	}
 
 	return (
 		<motion.div
