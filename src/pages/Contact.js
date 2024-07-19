@@ -12,14 +12,14 @@ const cardVariants = {
 const Contact = () => {
 	return (
 		<div
-			className="relative bg-gradient-to-b from-gray-50 to-[#FFB526] py-16 font-baloobhaijaan2"
+			className="relative bg-gradient-to-b from-gray-50 to-[#FFB526] py-16 font-baloobhaijaan2 overflow-hidden"
 			id="contact"
 		>
 			<div
 				className="absolute inset-0 bg-cover bg-center opacity-10 z-0"
 				style={{ backgroundImage: `url(${patternImage})` }}
 			/>
-			<div className="container mx-auto px-6 flex flex-col items-center justify-center">
+			<div className="container relative mx-auto z-10 px-6 flex flex-col items-center justify-center">
 				<InView triggerOnce>
 					{({ inView, ref }) => (
 						<motion.h1
@@ -42,7 +42,7 @@ const Contact = () => {
 								className="w-full bg-white p-6 rounded-lg shadow-lg text-center"
 								variants={cardVariants}
 								initial="hidden"
-								animate={inView ? "visible" : "hidden"}
+								animate={inView ? 'visible' : 'hidden'}
 								transition={{ duration: 0.6, delay: 0.2 }}
 							>
 								<a
@@ -53,7 +53,9 @@ const Contact = () => {
 								>
 									<FaLinkedin className="text-6xl mb-4" />
 									<h3 className="text-2xl font-semibold">LinkedIn</h3>
-									<p className="text-gray-600 mt-2">Connect with us on LinkedIn.</p>
+									<p className="text-gray-600 mt-2">
+										Connect with us on LinkedIn.
+									</p>
 								</a>
 							</motion.div>
 						)}
@@ -66,7 +68,7 @@ const Contact = () => {
 								className="w-full bg-white p-6 rounded-lg shadow-lg text-center"
 								variants={cardVariants}
 								initial="hidden"
-								animate={inView ? "visible" : "hidden"}
+								animate={inView ? 'visible' : 'hidden'}
 								transition={{ duration: 0.6, delay: 0.4 }}
 							>
 								<a
@@ -90,7 +92,7 @@ const Contact = () => {
 								className="w-full bg-white p-6 rounded-lg shadow-lg text-center"
 								variants={cardVariants}
 								initial="hidden"
-								animate={inView ? "visible" : "hidden"}
+								animate={inView ? 'visible' : 'hidden'}
 								transition={{ duration: 0.6, delay: 0.6 }}
 							>
 								<a
@@ -99,7 +101,9 @@ const Contact = () => {
 								>
 									<FaEnvelope className="text-6xl mb-4" />
 									<h3 className="text-2xl font-semibold">Email</h3>
-									<p className="text-gray-600 mt-2">Drop us an email for any inquiries.</p>
+									<p className="text-gray-600 mt-2">
+										Drop us an email for any inquiries.
+									</p>
 								</a>
 							</motion.div>
 						)}
