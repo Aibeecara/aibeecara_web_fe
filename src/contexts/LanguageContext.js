@@ -4,10 +4,10 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('EN');
+  const [language, setLanguage] = useState('ID');
 
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('language') || 'EN';
+    const savedLanguage = localStorage.getItem('language') || 'ID';
     setLanguage(savedLanguage);
   }, []);
 
