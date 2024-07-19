@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { FaBars, FaDownload, FaTimes } from 'react-icons/fa'
+import React, { useState } from 'react'
+import { FaBars, FaTimes } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useLocation } from 'react-router-dom'
 import aibeecaraText from '../assets/TextAibeecaraOnly.png'
 import aibeecaraLogo from '../assets/IconAibeecaraOnly.png'
-import { MdOutlineFileDownload } from 'react-icons/md'
 import { BsAndroid } from 'react-icons/bs'
+import { AiOutlineClose } from 'react-icons/ai'
 
 const menuVariants = {
 	open: {
@@ -27,6 +27,11 @@ const itemVariants = {
 }
 
 function MobileMenu({ isOpen, onToggle, pathname }) {
+  const [isOpenPopUp, setIsOpenPopUp] = useState(false)
+
+	const openModal = () => setIsOpenPopUp(true)
+	const closeModal = () => setIsOpenPopUp(false)
+
 	return (
 		<motion.div
 			className="fixed top-0 left-0 right-0 bottom-0 z-50 text-lg"
@@ -74,12 +79,59 @@ function MobileMenu({ isOpen, onToggle, pathname }) {
 					animate="visible"
 					className="w-full flex justify-center items-center absolute bottom-8"
 				>
-					<button className="px-4 py-2 bg-gradient-to-r from-[#FFB526] to-[#FF8E26] hover:bg-[#d4a13b] rounded-full text-lg font-bold text-white cursor-pointer transition-all duration-300 flex items-center">
+					<button
+						onClick={openModal}
+						className="px-4 py-2 bg-gradient-to-r from-[#FFB526] to-[#FF8E26] hover:bg-[#d4a13b] rounded-full text-lg font-bold text-white cursor-pointer transition-all duration-300 flex items-center"
+					>
 						Download
-            <BsAndroid size={20} className="ml-2" />
+						<BsAndroid size={20} className="ml-2" />
 					</button>
 				</motion.li>
 			</ul>
+
+      {isOpenPopUp && (
+				<motion.div
+					className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-5"
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ duration: 0.3 }}
+				>
+					{/* Modal Container */}
+					<motion.div
+						className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative"
+						initial={{ scale: 0.9 }}
+						animate={{ scale: 1 }}
+						transition={{ duration: 0.3 }}
+					>
+						{/* Close Button */}
+						<button
+							onClick={closeModal}
+							className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 transition-colors duration-300"
+						>
+							<AiOutlineClose className="text-2xl" />
+						</button>
+
+						{/* Modal Content */}
+						<h2 className="text-2xl font-bold mb-4 text-center">
+							Download Our App
+						</h2>
+						<p className="text-gray-700 mb-6 text-center">
+							Click the button below to download our app and start your journey
+							towards effective language learning.
+						</p>
+						<div className="flex justify-center">
+							<a
+								href="https://github.com/rigelra15/aibeecara-download-app/raw/main/beecara-text.rar" // Ganti dengan link unduh aplikasi Anda
+								className="bg-[#FFB526] text-white px-6 py-3 rounded-full font-bold shadow-lg transition-transform duration-300 hover:scale-105"
+								onClick={closeModal}
+								download="beecara-text.rar"
+							>
+								Download Now
+							</a>
+						</div>
+					</motion.div>
+				</motion.div>
+			)}
 		</motion.div>
 	)
 }
@@ -92,6 +144,11 @@ export default function Navbar() {
 	const handleMenuToggle = () => {
 		setMenuOpen(!isMenuOpen)
 	}
+
+	const [isOpen, setIsOpen] = useState(false)
+
+	const openModal = () => setIsOpen(true)
+	const closeModal = () => setIsOpen(false)
 
 	return (
 		<motion.div
@@ -143,9 +200,12 @@ export default function Navbar() {
 				</ul>
 				<div className="hidden md:flex items-center">
 					{/* Desktop Download Button */}
-					<button className="px-4 py-2 bg-gradient-to-r from-[#FFB526] to-[#FF8E26] hover:bg-[#d4a13b] rounded-full text-lg font-bold text-white cursor-pointer transition-all duration-300 flex items-center">
+					<button
+						onClick={openModal}
+						className="px-4 py-2 bg-gradient-to-r from-[#FFB526] to-[#FF8E26] hover:bg-[#d4a13b] rounded-full text-lg font-bold text-white cursor-pointer transition-all duration-300 flex items-center"
+					>
 						Download
-            <BsAndroid size={20} className="ml-2" />
+						<BsAndroid size={20} className="ml-2" />
 					</button>
 				</div>
 				<div className="flex items-center md:hidden">
@@ -161,6 +221,50 @@ export default function Navbar() {
 					</button>
 				</div>
 			</div>
+
+			{isOpen && (
+				<motion.div
+					className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ duration: 0.3 }}
+				>
+					{/* Modal Container */}
+					<motion.div
+						className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative"
+						initial={{ scale: 0.9 }}
+						animate={{ scale: 1 }}
+						transition={{ duration: 0.3 }}
+					>
+						{/* Close Button */}
+						<button
+							onClick={closeModal}
+							className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 transition-colors duration-300"
+						>
+							<AiOutlineClose className="text-2xl" />
+						</button>
+
+						{/* Modal Content */}
+						<h2 className="text-2xl font-bold mb-4 text-center">
+							Download Our App
+						</h2>
+						<p className="text-gray-700 mb-6 text-center">
+							Click the button below to download our app and start your journey
+							towards effective language learning.
+						</p>
+						<div className="flex justify-center">
+							<a
+								href="https://github.com/rigelra15/aibeecara-download-app/raw/main/beecara-text.rar" // Ganti dengan link unduh aplikasi Anda
+								className="bg-[#FFB526] text-white px-6 py-3 rounded-full font-bold shadow-lg transition-transform duration-300 hover:scale-105"
+								onClick={closeModal}
+								download="beecara-text.rar"
+							>
+								Download Now
+							</a>
+						</div>
+					</motion.div>
+				</motion.div>
+			)}
 			<MobileMenu
 				isOpen={isMenuOpen}
 				onToggle={handleMenuToggle}

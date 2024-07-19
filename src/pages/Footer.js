@@ -1,13 +1,8 @@
 import React from 'react'
 import {
-	FaFacebook,
 	FaInstagram,
-	FaTwitter,
 	FaLinkedin,
-	FaTiktok,
 } from 'react-icons/fa'
-import { BsScissors } from 'react-icons/bs'
-import { FaX, FaXTwitter } from 'react-icons/fa6'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import aibeecaraText from '../assets/TextAibeecaraOnly.png'
 import aibeecaraLogo from '../assets/IconAibeecaraOnly.png'
@@ -53,7 +48,7 @@ const Footer = () => {
 					{/* Social Media Icons */}
 					<div className="flex space-x-6">
 						<a
-							href="https://instagram.com"
+							href="https://www.instagram.com/aibeecara/"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-gray-400 hover:text-yellow-500 transition duration-300"
@@ -61,7 +56,7 @@ const Footer = () => {
 							<FaInstagram size={24} />
 						</a>
 						<a
-							href="https://linkedin.com"
+							href="https://www.linkedin.com/in/aibeecara-indonesia/"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-gray-400 hover:text-yellow-500 transition duration-300"

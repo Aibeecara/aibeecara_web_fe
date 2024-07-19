@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
 import NavBar from './components/NavBar';
 import LandingPage from './pages/LandingPage';
 import Footer from './pages/Footer';
@@ -14,6 +13,31 @@ function App() {
         <Route path="*" element={<ComingSoon />} />
       </Routes>
       <Footer />
+
+      <style>
+				{`
+        /* Style untuk scrollbar */
+        ::-webkit-scrollbar {
+          width: 8px; /* Lebar scrollbar */
+        }
+
+        /* Track scrollbar */
+        ::-webkit-scrollbar-track {
+          border-radius: 10px; /* Border radius untuk track */
+        }
+
+        /* Handle scrollbar */
+        ::-webkit-scrollbar-thumb {
+          background-color: #888; /* Warna handle */
+          border-radius: 10px; /* Border radius untuk handle */
+        }
+
+        /* Ketika hover pada handle */
+        ::-webkit-scrollbar-thumb:hover {
+          background-color: #555; /* Warna handle saat hover */
+        }
+        `}
+			</style>
     </Router>
   );
 }
