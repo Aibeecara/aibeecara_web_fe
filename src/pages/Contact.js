@@ -123,10 +123,10 @@ const Contact = () => {
 				</div>
 			</div>
 
-			<Helmet>
+			{/* <Helmet>
 				<title>Contact | aibeecara</title>
 				<meta name="description" content="Contact us for any inquiries." />
-			</Helmet>
+			</Helmet> */}
 		</div>
 	)
 }

@@ -91,13 +91,13 @@ const Features = () => {
 				</div>
 			</div>
 
-			<Helmet>
+			{/* <Helmet>
 				<title>Features | aibeecara</title>
 				<meta
 					name="description"
 					content="Engage in conversations with a virtual character powered by AI, making learning interactive and engaging."
 				/>
-			</Helmet>
+			</Helmet> */}
 		</div>
 	)
 }
