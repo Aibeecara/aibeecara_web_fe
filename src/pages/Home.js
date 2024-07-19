@@ -5,11 +5,14 @@ import appLogo from '../assets/beecara.png'
 import { Helmet } from 'react-helmet'
 import { AiOutlineClose } from 'react-icons/ai'
 import { BsAndroid } from 'react-icons/bs'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const Home = () => {
 	const [isOpen, setIsOpen] = useState(false)
 
 	const [isScrollDownVisible, setIsScrollDownVisible] = useState(true)
+
+	const { language } = useLanguage()
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -65,7 +68,7 @@ const Home = () => {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 1 }}
 				>
-					Fun & Effective Language Learning through Virtual Adventures
+					{language === 'EN' ? 'Fun & Effective Language Learning through Virtual Adventures' : 'Belajar Bahasa Asing yang Menyenangkan & Efektif melalui Petualangan Virtual'}
 				</motion.h1>
 				<motion.div
 					initial={{ opacity: 0, y: 50 }}
@@ -76,7 +79,7 @@ const Home = () => {
 						onClick={openModal}
 						className="px-6 py-3 bg-gradient-to-r from-[#FFB526] to-[#FF8E26] hover:bg-[#d4a13b] rounded-full text-xl font-bold text-white cursor-pointer transition-all duration-300 flex items-center"
 					>
-						Download App
+						{language === 'EN' ? 'Download Now' : 'Unduh Sekarang'}
 						<BsAndroid size={20} className="ml-2" />
 					</button>
 				</motion.div>

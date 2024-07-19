@@ -6,15 +6,18 @@ import ComingSoon from './pages/ComingSoon'
 import Contact from './pages/Contact'
 import './App.css'
 import QRCodeGenerator from './pages/QRCode'
+import { useLanguage } from './contexts/LanguageContext'
 
 function App() {
+  const { language } = useLanguage()
+
 	return (
 		<Router>
 			<NavBar />
 			<Routes>
 				<Route path="/" element={<LandingPage />} />
 				<Route path="*" element={<ComingSoon />} />
-				{/* <Route path="/contact" element={<QRCodeGenerator />} /> */}
+				{/* <Route path={language === 'EN' ? '/contact' : '/kontak'} element={<QRCodeGenerator />} /> */}
 			</Routes>
 			<Footer />
 

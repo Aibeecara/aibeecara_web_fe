@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import { FaLinkedin, FaInstagram, FaEnvelope } from 'react-icons/fa'
 import patternImage from '../assets/pattern.png'
 import { InView } from 'react-intersection-observer'
+import { Helmet } from 'react-helmet'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const cardVariants = {
 	hidden: { opacity: 0, scale: 0.9 },
@@ -10,6 +12,8 @@ const cardVariants = {
 }
 
 const Contact = () => {
+	const { language } = useLanguage()
+
 	return (
 		<div
 			className="relative bg-gradient-to-b from-gray-50 to-[#FFB526] py-16 font-baloobhaijaan2 overflow-hidden"
@@ -29,7 +33,7 @@ const Contact = () => {
 							animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
 							transition={{ duration: 0.8 }}
 						>
-							Contact Us
+							{language === 'EN' ? 'Contact Us' : 'Hubungi Kami'}
 						</motion.h1>
 					)}
 				</InView>
@@ -54,7 +58,9 @@ const Contact = () => {
 									<FaLinkedin className="text-6xl mb-4" />
 									<h3 className="text-2xl font-semibold">LinkedIn</h3>
 									<p className="text-gray-600 mt-2">
-										Connect with us on LinkedIn.
+										{language === 'EN'
+											? 'Connect with us on LinkedIn.'
+											: 'Terhubung dengan kami di LinkedIn.'}
 									</p>
 								</a>
 							</motion.div>
@@ -79,7 +85,11 @@ const Contact = () => {
 								>
 									<FaInstagram className="text-6xl mb-4" />
 									<h3 className="text-2xl font-semibold">Instagram</h3>
-									<p className="text-gray-600 mt-2">Follow us on Instagram.</p>
+									<p className="text-gray-600 mt-2">
+										{language === 'EN'
+											? 'Follow us on Instagram for updates.'
+											: 'Ikuti kami di Instagram untuk mendapatkan pembaruan.'}
+									</p>
 								</a>
 							</motion.div>
 						)}
@@ -102,7 +112,9 @@ const Contact = () => {
 									<FaEnvelope className="text-6xl mb-4" />
 									<h3 className="text-2xl font-semibold">Email</h3>
 									<p className="text-gray-600 mt-2">
-										Drop us an email for any inquiries.
+										{language === 'EN'
+											? 'Send us an email for inquiries.'
+											: 'Kirimkan email kepada kami untuk pertanyaan.'}
 									</p>
 								</a>
 							</motion.div>
@@ -110,6 +122,11 @@ const Contact = () => {
 					</InView>
 				</div>
 			</div>
+
+			<Helmet>
+				<title>Contact | aibeecara</title>
+				<meta name="description" content="Contact us for any inquiries." />
+			</Helmet>
 		</div>
 	)
 }

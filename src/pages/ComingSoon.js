@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import appLogo from '../assets/beecara.png'; // Ganti dengan path logo aplikasi Anda
+import appLogo from '../assets/beecara.png';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const ComingSoon = () => {
+  const { language } = useLanguage()
+
   return (
     <div
       className="relative flex flex-col items-center justify-center min-h-screen bg-cover bg-center bg-gradient-to-r from-[#FFB526] to-[#FF8E26] font-baloobhaijaan2 px-4 sm:px-6 md:px-8"
@@ -24,7 +27,7 @@ const ComingSoon = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          Coming Soon
+          {language === 'EN' ? 'Coming Soon' : 'Segera Hadir'}
         </motion.h1>
         <motion.p
           className="text-lg md:text-xl mb-6"
@@ -32,7 +35,7 @@ const ComingSoon = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          We're working hard to bring you something amazing. Stay tuned for updates!
+          {language === 'EN' ? 'We\'re working hard to bring you something amazing. Stay tuned for updates!' : 'Kami sedang bekerja keras untuk memberikan yang terbaik. Tetap pantau untuk informasi terbaru!'}
         </motion.p>
       </div>
     </div>

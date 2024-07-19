@@ -7,6 +7,7 @@ import aibeecaraText from '../assets/TextAibeecaraOnly.png'
 import aibeecaraLogo from '../assets/IconAibeecaraOnly.png'
 import { BsAndroid } from 'react-icons/bs'
 import { AiOutlineClose } from 'react-icons/ai'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const menuVariants = {
 	open: {
@@ -29,13 +30,19 @@ const itemVariants = {
 function MobileMenu({ isOpen, onToggle, pathname }) {
 	const [isOpenPopUp, setIsOpenPopUp] = useState(false)
 
+	const { language, changeLanguage } = useLanguage()
+
+	const handleLanguageChange = (event) => {
+		changeLanguage(event.target.value)
+	}
+
 	const openModal = () => setIsOpenPopUp(true)
 	const closeModal = () => setIsOpenPopUp(false)
 
 	const handleDownload = () => {
 		const link = document.createElement('a')
 		link.href =
-			'https://firebasestorage.googleapis.com/v0/b/aibeecara-firebase.appspot.com/o/beecara-text.rar?alt=media&token=c036a3c1-2fe3-461a-9ceb-f3ead61cd88c';
+			'https://firebasestorage.googleapis.com/v0/b/aibeecara-firebase.appspot.com/o/beecara-text.rar?alt=media&token=c036a3c1-2fe3-461a-9ceb-f3ead61cd88c'
 		link.download = 'beecara-text.rar' // Nama file saat diunduh
 		document.body.appendChild(link)
 		link.click()
@@ -60,36 +67,69 @@ function MobileMenu({ isOpen, onToggle, pathname }) {
 				</button>
 			</div>
 			<ul className="flex flex-col items-center justify-center h-full space-y-8">
-				{['Home', 'Features', 'Contact', 'About'].map((item) => {
-					const itemPath = item === 'Home' ? '/' : `/${item.toLowerCase()}`
-					return (
-						<motion.li
-							key={item}
-							variants={itemVariants}
-							initial="hidden"
-							animate="visible"
-						>
-							<a
-								href={itemPath}
-								className={`px-4 py-2 font-semibold ${
-									pathname === itemPath
-										? 'bg-gradient-to-r from-[#FFB526] to-[#FF8E26] text-white font-semibold'
-										: ''
-								} rounded-full`}
-								onClick={onToggle}
-							>
-								{item}
-							</a>
-						</motion.li>
-					)
-				})}
+				{language === 'EN'
+					? ['Home', 'Features', 'Contact', 'About'].map((item) => {
+							const itemPath = item === 'Home' ? '/' : `/${item.toLowerCase()}`
+							return (
+								<motion.li
+									key={item}
+									variants={itemVariants}
+									initial="hidden"
+									animate="visible"
+								>
+									<a
+										href={itemPath}
+										className={`px-4 py-2 font-semibold ${
+											pathname === itemPath
+												? 'bg-gradient-to-r from-[#FFB526] to-[#FF8E26] text-white font-semibold'
+												: ''
+										} rounded-full`}
+										onClick={onToggle}
+									>
+										{item}
+									</a>
+								</motion.li>
+							)
+					  })
+					: ['Beranda', 'Fitur', 'Kontak', 'Tentang'].map((item) => {
+							const itemPath =
+								item === 'Beranda' ? '/' : `/${item.toLowerCase()}`
+							return (
+								<motion.li
+									key={item}
+									variants={itemVariants}
+									initial="hidden"
+									animate="visible"
+								>
+									<a
+										href={itemPath}
+										className={`px-4 py-2 font-semibold ${
+											pathname === itemPath
+												? 'bg-gradient-to-r from-[#FFB526] to-[#FF8E26] text-white font-semibold'
+												: ''
+										} rounded-full`}
+										onClick={onToggle}
+									>
+										{item}
+									</a>
+								</motion.li>
+							)
+					  })}
 				{/* Mobile Download Button */}
 				<motion.li
 					variants={itemVariants}
 					initial="hidden"
 					animate="visible"
-					className="w-full flex justify-center items-center absolute bottom-8"
+					className="w-full flex gap-4 justify-center items-center absolute bottom-8"
 				>
+					<select
+						value={language}
+						onChange={handleLanguageChange}
+						className="bg-white text-black px-4 py-2 rounded-full"
+					>
+						<option value="EN">EN</option>
+						<option value="ID">ID</option>
+					</select>
 					<button
 						onClick={openModal}
 						className="px-4 py-2 bg-gradient-to-r from-[#FFB526] to-[#FF8E26] hover:bg-[#d4a13b] rounded-full text-lg font-bold text-white cursor-pointer transition-all duration-300 flex items-center"
@@ -159,15 +199,10 @@ export default function Navbar() {
 	const openModal = () => setIsOpen(true)
 	const closeModal = () => setIsOpen(false)
 
-	const handleDownload = () => {
-		const link = document.createElement('a')
-		link.href =
-			'https://firebasestorage.googleapis.com/v0/b/aibeecara-firebase.appspot.com/o/beecara-text.rar?alt=media&token=c036a3c1-2fe3-461a-9ceb-f3ead61cd88c';
-		link.download = 'beecara-text.rar' // Nama file saat diunduh
-		document.body.appendChild(link)
-		link.click()
-		document.body.removeChild(link)
-		closeModal()
+	const { language, changeLanguage } = useLanguage()
+
+	const handleLanguageChange = (event) => {
+		changeLanguage(event.target.value)
 	}
 
 	return (
@@ -195,38 +230,77 @@ export default function Navbar() {
 					className="hidden md:flex space-x-8 justify-center absolute items-center transition-all"
 					style={{ right: '50%', transform: 'translateX(50%)' }}
 				>
-					{['Home', 'Features', 'Contact', 'About'].map((item) => {
-						const itemPath = item === 'Home' ? '/' : `/${item.toLowerCase()}`
-						return (
-							<motion.li
-								key={item}
-								initial="hidden"
-								animate="visible"
-								variants={itemVariants}
-							>
-								<a
-									href={itemPath}
-									className={`transition-all hover:font-semibold hover:cursor-pointer ${
-										pathname === itemPath
-											? 'bg-gradient-to-r from-[#FFB526] to-[#FF8E26] rounded-full px-4 py-2 text-white font-semibold'
-											: ''
-									}`}
-								>
-									{item}
-								</a>
-							</motion.li>
-						)
-					})}
+					{language === 'EN'
+						? ['Home', 'Features', 'Contact', 'About'].map((item) => {
+								const itemPath =
+									item === 'Home' ? '/' : `/${item.toLowerCase()}`
+								return (
+									<motion.li
+										key={item}
+										initial="hidden"
+										animate="visible"
+										variants={itemVariants}
+									>
+										<a
+											href={itemPath}
+											className={`transition-all hover:font-semibold hover:cursor-pointer ${
+												pathname === itemPath
+													? 'bg-gradient-to-r from-[#FFB526] to-[#FF8E26] rounded-full px-4 py-2 text-white font-semibold'
+													: ''
+											}`}
+										>
+											{item}
+										</a>
+									</motion.li>
+								)
+						  })
+						: ['Beranda', 'Fitur', 'Kontak', 'Tentang'].map((item) => {
+								const itemPath =
+									item === 'Beranda' ? '/' : `/${item.toLowerCase()}`
+								return (
+									<motion.li
+										key={item}
+										initial="hidden"
+										animate="visible"
+										variants={itemVariants}
+									>
+										<a
+											href={itemPath}
+											className={`transition-all hover:font-semibold hover:cursor-pointer ${
+												pathname === itemPath
+													? 'bg-gradient-to-r from-[#FFB526] to-[#FF8E26] rounded-full px-4 py-2 text-white font-semibold'
+													: ''
+											}`}
+										>
+											{item}
+										</a>
+									</motion.li>
+								)
+						  })}
 				</ul>
-				<div className="hidden md:flex items-center">
-					{/* Desktop Download Button */}
-					<button
-						onClick={openModal}
-						className="px-4 py-2 bg-gradient-to-r from-[#FFB526] to-[#FF8E26] hover:bg-[#d4a13b] rounded-full text-lg font-bold text-white cursor-pointer transition-all duration-300 flex items-center"
+				<div className="absolute right-0 hidden md:flex items-center space-x-4 pr-4">
+					<select
+						value={language}
+						onChange={handleLanguageChange}
+						className="bg-white text-black px-2 py-1 rounded"
 					>
-						Download
-						<BsAndroid size={20} className="ml-2" />
-					</button>
+						<option value="EN">EN</option>
+						<option value="ID">ID</option>
+					</select>
+					<motion.li
+						variants={itemVariants}
+						initial="hidden"
+						animate="visible"
+						className="flex justify-center items-center"
+					>
+						<button
+							onClick={openModal}
+							className="px-4 py-2 bg-gradient-to-r from-[#FFB526] to-[#FF8E26] hover:bg-[#d4a13b] rounded-full text-lg font-bold text-white cursor-pointer transition-all duration-300 flex items-center"
+						>
+							{language === 'EN' ? 'Download' : 'Unduh'}
+							<BsAndroid size={20} className="ml-2" />
+						</button>
+					</motion.li>
 				</div>
 				<div className="flex items-center md:hidden">
 					<button
@@ -266,11 +340,12 @@ export default function Navbar() {
 
 						{/* Modal Content */}
 						<h2 className="text-2xl font-bold mb-4 text-center">
-							Download Our App
+							{language === 'EN' ? 'Download Our App' : 'Unduh Aplikasi Kami'}
 						</h2>
 						<p className="text-gray-700 mb-6 text-center">
-							Click the button below to download our app and start your journey
-							towards effective language learning.
+							{language === 'EN'
+								? 'Click the button below to download our app and start your journey towards effective language learning.'
+								: 'Klik tombol di bawah untuk mengunduh aplikasi kami dan mulai perjalanan Anda menuju pembelajaran bahasa yang efektif.'}
 						</p>
 						<div className="flex justify-center">
 							<a
@@ -279,7 +354,7 @@ export default function Navbar() {
 								onClick={closeModal}
 								download="beecara-text.rar"
 							>
-								Download Now
+								{language === 'EN' ? 'Download Now' : 'Unduh Sekarang'}
 							</a>
 						</div>
 					</motion.div>
