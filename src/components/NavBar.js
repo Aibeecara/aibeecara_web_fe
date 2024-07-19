@@ -35,7 +35,7 @@ function MobileMenu({ isOpen, onToggle, pathname }) {
 	const handleDownload = () => {
 		const link = document.createElement('a')
 		link.href =
-			'https://github.com/rigelra15/aibeecara-download-app/raw/main/beecara-text.rar' // Ganti dengan URL unduh gambar Anda
+			'https://firebasestorage.googleapis.com/v0/b/aibeecara-firebase.appspot.com/o/beecara-text.rar?alt=media&token=c036a3c1-2fe3-461a-9ceb-f3ead61cd88c';
 		link.download = 'beecara-text.rar' // Nama file saat diunduh
 		document.body.appendChild(link)
 		link.click()
@@ -162,7 +162,7 @@ export default function Navbar() {
 	const handleDownload = () => {
 		const link = document.createElement('a')
 		link.href =
-			'https://github.com/rigelra15/aibeecara-download-app/raw/main/beecara-text.rar' // Ganti dengan URL unduh gambar Anda
+			'https://firebasestorage.googleapis.com/v0/b/aibeecara-firebase.appspot.com/o/beecara-text.rar?alt=media&token=c036a3c1-2fe3-461a-9ceb-f3ead61cd88c';
 		link.download = 'beecara-text.rar' // Nama file saat diunduh
 		document.body.appendChild(link)
 		link.click()
