@@ -8,6 +8,7 @@ import aibeecaraLogo from '../assets/IconAibeecaraOnly.png'
 import { BsAndroid } from 'react-icons/bs'
 import { AiOutlineClose } from 'react-icons/ai'
 import { useLanguage } from '../contexts/LanguageContext'
+import PopUpDownload from './PopUpDownload'
 
 const menuVariants = {
 	open: {
@@ -141,45 +142,7 @@ function MobileMenu({ isOpen, onToggle, pathname }) {
 			</ul>
 
 			{isOpenPopUp && (
-				<motion.div
-					className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-5"
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ duration: 0.3 }}
-				>
-					{/* Modal Container */}
-					<motion.div
-						className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative"
-						initial={{ scale: 0.9 }}
-						animate={{ scale: 1 }}
-						transition={{ duration: 0.3 }}
-					>
-						{/* Close Button */}
-						<button
-							onClick={closeModal}
-							className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 transition-colors duration-300"
-						>
-							<AiOutlineClose className="text-2xl" />
-						</button>
-
-						{/* Modal Content */}
-						<h2 className="text-2xl font-bold mb-4 text-center">
-							Download Our App
-						</h2>
-						<p className="text-gray-700 mb-6 text-center">
-							Click the button below to download our app and start your journey
-							towards effective language learning.
-						</p>
-						<div className="flex justify-center">
-							<button
-								onClick={handleDownload}
-								className="bg-[#FFB526] text-white px-6 py-3 rounded-full font-bold shadow-lg transition-transform duration-300 hover:scale-105"
-							>
-								Download Now
-							</button>
-						</div>
-					</motion.div>
-				</motion.div>
+				<PopUpDownload closeModal={closeModal} handleDownload={handleDownload} />
 			)}
 		</motion.div>
 	)
@@ -189,6 +152,17 @@ export default function Navbar() {
 	const [isMenuOpen, setMenuOpen] = useState(false)
 	const location = useLocation()
 	const pathname = location.pathname
+
+	const handleDownload = () => {
+		const link = document.createElement('a')
+		link.href =
+			'https://firebasestorage.googleapis.com/v0/b/aibeecara-firebase.appspot.com/o/beecara-text.rar?alt=media&token=c036a3c1-2fe3-461a-9ceb-f3ead61cd88c'
+		link.download = 'beecara-text.rar' // Nama file saat diunduh
+		document.body.appendChild(link)
+		link.click()
+		document.body.removeChild(link)
+		closeModal()
+	}
 
 	const handleMenuToggle = () => {
 		setMenuOpen(!isMenuOpen)
@@ -317,48 +291,7 @@ export default function Navbar() {
 			</div>
 
 			{isOpen && (
-				<motion.div
-					className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ duration: 0.3 }}
-				>
-					{/* Modal Container */}
-					<motion.div
-						className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative"
-						initial={{ scale: 0.9 }}
-						animate={{ scale: 1 }}
-						transition={{ duration: 0.3 }}
-					>
-						{/* Close Button */}
-						<button
-							onClick={closeModal}
-							className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 transition-colors duration-300"
-						>
-							<AiOutlineClose className="text-2xl" />
-						</button>
-
-						{/* Modal Content */}
-						<h2 className="text-2xl font-bold mb-4 text-center">
-							{language === 'EN' ? 'Download Our App' : 'Unduh Aplikasi Kami'}
-						</h2>
-						<p className="text-gray-700 mb-6 text-center">
-							{language === 'EN'
-								? 'Click the button below to download our app and start your journey towards effective language learning.'
-								: 'Klik tombol di bawah untuk mengunduh aplikasi kami dan mulai perjalanan Anda menuju pembelajaran bahasa yang efektif.'}
-						</p>
-						<div className="flex justify-center">
-							<a
-								href="https://github.com/rigelra15/aibeecara-download-app/raw/main/beecara-text.rar" // Ganti dengan link unduh aplikasi Anda
-								className="bg-[#FFB526] text-white px-6 py-3 rounded-full font-bold shadow-lg transition-transform duration-300 hover:scale-105"
-								onClick={closeModal}
-								download="beecara-text.rar"
-							>
-								{language === 'EN' ? 'Download Now' : 'Unduh Sekarang'}
-							</a>
-						</div>
-					</motion.div>
-				</motion.div>
+				<PopUpDownload closeModal={closeModal} handleDownload={handleDownload} />
 			)}
 			<MobileMenu
 				isOpen={isMenuOpen}
