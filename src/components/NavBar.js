@@ -39,17 +39,6 @@ function MobileMenu({ isOpen, onToggle, pathname }) {
 	const openModal = () => setIsOpenPopUp(true)
 	const closeModal = () => setIsOpenPopUp(false)
 
-	const handleDownload = () => {
-		const link = document.createElement('a')
-		link.href =
-			'https://github.com/Aibeecara/aibeecara_web_fe/releases/download/v0.25.07-alpha/aibeecara-alpha.apk'
-		link.download = 'aibeecara-alpha.apk' // Nama file saat diunduh
-		document.body.appendChild(link)
-		link.click()
-		document.body.removeChild(link)
-		closeModal()
-	}
-
 	return (
 		<motion.div
 			className="fixed top-0 left-0 right-0 bottom-0 z-50 text-lg"
@@ -140,12 +129,7 @@ function MobileMenu({ isOpen, onToggle, pathname }) {
 				</motion.li>
 			</ul>
 
-			{isOpenPopUp && (
-				<PopUpDownload
-					closeModal={closeModal}
-					handleDownload={handleDownload}
-				/>
-			)}
+			{isOpenPopUp && <PopUpDownload closeModal={closeModal} />}
 		</motion.div>
 	)
 }
@@ -281,11 +265,7 @@ export default function Navbar() {
 				</div>
 			</div>
 
-			{isOpen && (
-				<PopUpDownload
-					closeModal={closeModal}
-				/>
-			)}
+			{isOpen && <PopUpDownload closeModal={closeModal} />}
 			<MobileMenu
 				isOpen={isMenuOpen}
 				onToggle={handleMenuToggle}
