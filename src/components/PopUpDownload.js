@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { AiOutlineClose } from 'react-icons/ai'
 import { useLanguage } from '../contexts/LanguageContext'
 
-const PopUpDownload = ({ closeModal, handleDownload }) => {
+const PopUpDownload = ({ closeModal }) => {
 	const { language } = useLanguage()
 
 	return (
@@ -45,12 +45,13 @@ const PopUpDownload = ({ closeModal, handleDownload }) => {
 						: 'Catatan: Saat ini, aplikasi sedang dalam tahap pengujian alpha'}
 				</p>
 				<div className="flex justify-center">
-					<button
-						onClick={handleDownload}
+					<a
+						href="https://github.com/Aibeecara/aibeecara_web_fe/releases/download/v0.25.07-alpha/aibeecara-v0.25.07-alpha.apk"
+						download
 						className="bg-[#FFB526] text-white px-6 py-3 rounded-full font-bold shadow-lg transition-transform duration-300 hover:scale-105"
 					>
 						{language === 'EN' ? 'Download Now' : 'Unduh Sekarang'}
-					</button>
+					</a>
 				</div>
 			</motion.div>
 		</motion.div>

@@ -3,7 +3,6 @@ import { motion } from 'framer-motion'
 import imageBG from '../assets/bg.jpeg'
 import appLogo from '../assets/beecara.png'
 import { Helmet } from 'react-helmet'
-import { AiOutlineClose } from 'react-icons/ai'
 import { BsAndroid } from 'react-icons/bs'
 import { useLanguage } from '../contexts/LanguageContext'
 import PopUpDownload from '../components/PopUpDownload'
@@ -36,17 +35,6 @@ const Home = () => {
 	const openModal = () => setIsOpen(true)
 	const closeModal = () => setIsOpen(false)
 
-	const handleDownload = () => {
-		const link = document.createElement('a')
-		link.href =
-			'https://firebasestorage.googleapis.com/v0/b/aibeecara-firebase.appspot.com/o/beecara-text.rar?alt=media&token=c036a3c1-2fe3-461a-9ceb-f3ead61cd88c'
-		link.download = 'beecara-text.rar' // Nama file saat diunduh
-		document.body.appendChild(link)
-		link.click()
-		document.body.removeChild(link)
-		closeModal()
-	}
-
 	return (
 		<div
 			className="relative flex flex-col items-center justify-center min-h-screen p-6 bg-[#FFB526] bg-cover bg-center font-baloobhaijaan2"
@@ -69,7 +57,9 @@ const Home = () => {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 1 }}
 				>
-					{language === 'EN' ? 'Fun & Effective Language Learning through Virtual Adventures' : 'Belajar Bahasa Asing yang Menyenangkan & Efektif melalui Petualangan Virtual'}
+					{language === 'EN'
+						? 'Fun & Effective Language Learning through Virtual Adventures'
+						: 'Belajar Bahasa Asing yang Menyenangkan & Efektif melalui Petualangan Virtual'}
 				</motion.h1>
 				<motion.div
 					initial={{ opacity: 0, y: 50 }}
@@ -107,9 +97,7 @@ const Home = () => {
 				</motion.p> */}
 			</div>
 
-			{isOpen && (
-				<PopUpDownload closeModal={closeModal} handleDownload={handleDownload} />
-			)}
+			{isOpen && <PopUpDownload closeModal={closeModal} />}
 
 			<style>
 				{`

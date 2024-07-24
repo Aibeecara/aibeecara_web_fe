@@ -6,7 +6,6 @@ import { useLocation } from 'react-router-dom'
 import aibeecaraText from '../assets/TextAibeecaraOnly.png'
 import aibeecaraLogo from '../assets/IconAibeecaraOnly.png'
 import { BsAndroid } from 'react-icons/bs'
-import { AiOutlineClose } from 'react-icons/ai'
 import { useLanguage } from '../contexts/LanguageContext'
 import PopUpDownload from './PopUpDownload'
 
@@ -43,8 +42,8 @@ function MobileMenu({ isOpen, onToggle, pathname }) {
 	const handleDownload = () => {
 		const link = document.createElement('a')
 		link.href =
-			'https://firebasestorage.googleapis.com/v0/b/aibeecara-firebase.appspot.com/o/beecara-text.rar?alt=media&token=c036a3c1-2fe3-461a-9ceb-f3ead61cd88c'
-		link.download = 'beecara-text.rar' // Nama file saat diunduh
+			'https://github.com/Aibeecara/aibeecara_web_fe/releases/download/v0.25.07-alpha/aibeecara-alpha.apk'
+		link.download = 'aibeecara-alpha.apk' // Nama file saat diunduh
 		document.body.appendChild(link)
 		link.click()
 		document.body.removeChild(link)
@@ -142,7 +141,10 @@ function MobileMenu({ isOpen, onToggle, pathname }) {
 			</ul>
 
 			{isOpenPopUp && (
-				<PopUpDownload closeModal={closeModal} handleDownload={handleDownload} />
+				<PopUpDownload
+					closeModal={closeModal}
+					handleDownload={handleDownload}
+				/>
 			)}
 		</motion.div>
 	)
@@ -152,17 +154,6 @@ export default function Navbar() {
 	const [isMenuOpen, setMenuOpen] = useState(false)
 	const location = useLocation()
 	const pathname = location.pathname
-
-	const handleDownload = () => {
-		const link = document.createElement('a')
-		link.href =
-			'https://firebasestorage.googleapis.com/v0/b/aibeecara-firebase.appspot.com/o/beecara-text.rar?alt=media&token=c036a3c1-2fe3-461a-9ceb-f3ead61cd88c'
-		link.download = 'beecara-text.rar' // Nama file saat diunduh
-		document.body.appendChild(link)
-		link.click()
-		document.body.removeChild(link)
-		closeModal()
-	}
 
 	const handleMenuToggle = () => {
 		setMenuOpen(!isMenuOpen)
@@ -291,7 +282,9 @@ export default function Navbar() {
 			</div>
 
 			{isOpen && (
-				<PopUpDownload closeModal={closeModal} handleDownload={handleDownload} />
+				<PopUpDownload
+					closeModal={closeModal}
+				/>
 			)}
 			<MobileMenu
 				isOpen={isMenuOpen}
