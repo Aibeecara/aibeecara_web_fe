@@ -7,6 +7,7 @@ import aibeecaraLogo from '../assets/IconAibeecaraOnly.png'
 import { MdEmail } from 'react-icons/md'
 import { InView } from 'react-intersection-observer'
 import { useLanguage } from '../contexts/LanguageContext'
+import { useLocation } from 'react-router-dom'
 
 const Footer = () => {
 	const footerVariants = {
@@ -15,6 +16,14 @@ const Footer = () => {
 	}
 
 	const { language } = useLanguage()
+	const { pathname } = useLocation()
+
+	const menuItems = {
+		EN: ['Home', 'Features', 'Contact', 'About'],
+		ID: ['Beranda', 'Fitur', 'Kontak', 'Tentang'],
+	}
+
+	const paths = ['home', 'features', 'contact', 'about']
 
 	return (
 		<footer className="bg-zinc-900 text-white py-12 font-baloobhaijaan2">
@@ -44,33 +53,24 @@ const Footer = () => {
 									/>
 								</a>
 								<p className="text-gray-400 text-lg text-center">
-									{language === 'EN' ? 'Fun & Effective Language Learning through Virtual Adventures' : 'Belajar Bahasa Asing yang Menyenangkan & Efektif melalui Petualangan Virtual'}
+									{language === 'EN'
+										? 'Fun & Effective Language Learning through Virtual Adventures'
+										: 'Belajar Bahasa Asing yang Menyenangkan & Efektif melalui Petualangan Virtual'}
 								</p>
 							</div>
 
 							{/* Navigation Links */}
 							<div className="flex flex-wrap justify-center space-x-6 md:space-x-12 mb-8 md:mb-0 text-lg">
-								{language === 'EN' ? (
-									['Home', 'Features', 'Contact', 'About'].map((item, index) => (
+								{menuItems[language].map((item, index) => (
+									<li key={index} className="list-none">
 										<a
-											key={index}
-											href={`/${item.toLowerCase()}`}
+											href={`/${paths[index]}`}
 											className="text-gray-400 hover:text-yellow-500 transition duration-300"
 										>
 											{item}
 										</a>
-									))
-								) : (
-									['Beranda', 'Fitur', 'Kontak', 'Tentang'].map((item, index) => (
-										<a
-											key={index}
-											href={`/${item.toLowerCase()}`}
-											className="text-gray-400 hover:text-yellow-500 transition duration-300"
-										>
-											{item}
-										</a>
-									))
-								)}
+									</li>
+								))}
 							</div>
 
 							{/* Social Media Icons */}
@@ -104,7 +104,10 @@ const Footer = () => {
 					)}
 				</InView>
 				<div className="mt-8 text-center text-gray-500">
-					&copy; {new Date().getFullYear()} Aibeecara Indonesia. {language === 'EN' ? 'All rights reserved.' : 'Seluruh hak cipta dilindungi.'}
+					&copy; {new Date().getFullYear()} Aibeecara Indonesia.{' '}
+					{language === 'EN'
+						? 'All rights reserved.'
+						: 'Seluruh hak cipta dilindungi.'}
 					{/* &copy; {new Date().getFullYear()} Aibeecara Indonesia. All rights reserved. */}
 				</div>
 			</div>

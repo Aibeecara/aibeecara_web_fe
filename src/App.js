@@ -7,6 +7,8 @@ import Contact from './pages/Contact'
 import './App.css'
 import QRCodeGenerator from './pages/QRCode'
 import { useLanguage } from './contexts/LanguageContext'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import DeleteAccount from './pages/DeleteAccount'
 
 function App() {
   const { language } = useLanguage()
@@ -17,7 +19,9 @@ function App() {
 			<Routes>
 				<Route path="/" element={<LandingPage />} />
 				<Route path="*" element={<ComingSoon />} />
-				{/* <Route path={language === 'EN' ? '/contact' : '/kontak'} element={<QRCodeGenerator />} /> */}
+        <Route path="/about/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/about/account-deletion" element={<DeleteAccount />} />
+				<Route path="/" element={<QRCodeGenerator />} />
 			</Routes>
 			<Footer />
 

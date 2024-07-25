@@ -8,6 +8,7 @@ import aibeecaraLogo from '../assets/IconAibeecaraOnly.png'
 import { BsAndroid } from 'react-icons/bs'
 import { useLanguage } from '../contexts/LanguageContext'
 import PopUpDownload from './PopUpDownload'
+import DropdownMenu from './DropdownMenu' // Import the new DropdownMenu component
 
 const menuVariants = {
 	open: {
@@ -21,6 +22,13 @@ const menuVariants = {
 		transition: { duration: 0.3 },
 	},
 }
+
+const menuItems = {
+	EN: ['Home', 'Features', 'Contact', 'About'],
+	ID: ['Beranda', 'Fitur', 'Kontak', 'Tentang'],
+}
+
+const paths = ['home', 'features', 'contact', 'about']
 
 const itemVariants = {
 	hidden: { opacity: 0, y: 20 },
@@ -56,54 +64,30 @@ function MobileMenu({ isOpen, onToggle, pathname }) {
 				</button>
 			</div>
 			<ul className="flex flex-col items-center justify-center h-full space-y-8">
-				{language === 'EN'
-					? ['Home', 'Features', 'Contact', 'About'].map((item) => {
-							const itemPath = item === 'Home' ? '/' : `/${item.toLowerCase()}`
-							return (
-								<motion.li
-									key={item}
-									variants={itemVariants}
-									initial="hidden"
-									animate="visible"
-								>
-									<a
-										href={itemPath}
-										className={`px-4 py-2 font-semibold ${
-											pathname === itemPath
-												? 'bg-gradient-to-r from-[#FFB526] to-[#FF8E26] text-white font-semibold'
-												: ''
-										} rounded-full`}
-										onClick={onToggle}
-									>
-										{item}
-									</a>
-								</motion.li>
-							)
-					  })
-					: ['Beranda', 'Fitur', 'Kontak', 'Tentang'].map((item) => {
-							const itemPath =
-								item === 'Beranda' ? '/' : `/${item.toLowerCase()}`
-							return (
-								<motion.li
-									key={item}
-									variants={itemVariants}
-									initial="hidden"
-									animate="visible"
-								>
-									<a
-										href={itemPath}
-										className={`px-4 py-2 font-semibold ${
-											pathname === itemPath
-												? 'bg-gradient-to-r from-[#FFB526] to-[#FF8E26] text-white font-semibold'
-												: ''
-										} rounded-full`}
-										onClick={onToggle}
-									>
-										{item}
-									</a>
-								</motion.li>
-							)
-					  })}
+				{menuItems[language].map((item, index) => {
+					const itemPath = `/${paths[index]}`
+
+					return (
+						<motion.li
+							key={item}
+							variants={itemVariants}
+							initial="hidden"
+							animate="visible"
+						>
+							<a
+								href={itemPath}
+								className={`px-4 py-2 font-semibold ${
+									pathname.startsWith(itemPath)
+										? 'bg-gradient-to-r from-[#FFB526] to-[#FF8E26] text-white font-semibold'
+										: ''
+								} rounded-full`}
+								onClick={() => onToggle()}
+							>
+								{item}
+							</a>
+						</motion.li>
+					)
+				})}
 				{/* Mobile Download Button */}
 				<motion.li
 					variants={itemVariants}
@@ -136,11 +120,16 @@ function MobileMenu({ isOpen, onToggle, pathname }) {
 
 export default function Navbar() {
 	const [isMenuOpen, setMenuOpen] = useState(false)
+	const [isDropdownOpen, setDropdownOpen] = useState(false) // New state for dropdown menu
 	const location = useLocation()
 	const pathname = location.pathname
 
 	const handleMenuToggle = () => {
 		setMenuOpen(!isMenuOpen)
+	}
+
+	const handleDropdownToggle = () => {
+		setDropdownOpen(!isDropdownOpen)
 	}
 
 	const [isOpen, setIsOpen] = useState(false)
@@ -179,53 +168,47 @@ export default function Navbar() {
 					className="hidden md:flex space-x-8 justify-center absolute items-center transition-all"
 					style={{ right: '50%', transform: 'translateX(50%)' }}
 				>
-					{language === 'EN'
-						? ['Home', 'Features', 'Contact', 'About'].map((item) => {
-								const itemPath =
-									item === 'Home' ? '/' : `/${item.toLowerCase()}`
-								return (
-									<motion.li
-										key={item}
-										initial="hidden"
-										animate="visible"
-										variants={itemVariants}
+					{menuItems[language].map((item, index) => {
+						const itemPath = `/${paths[index]}`
+						return (
+							<motion.li
+								key={item}
+								initial="hidden"
+								animate="visible"
+								variants={itemVariants}
+							>
+								{item === 'About' ? (
+									<div
+										className="relative group"
+										onMouseEnter={() => setDropdownOpen(true)}
+										onMouseLeave={() => setDropdownOpen(false)}
 									>
-										<a
-											href={itemPath}
+										<button
 											className={`transition-all hover:font-semibold hover:cursor-pointer ${
-												pathname === itemPath
+												pathname.startsWith(itemPath)
 													? 'bg-gradient-to-r from-[#FFB526] to-[#FF8E26] rounded-full px-4 py-2 text-white font-semibold'
 													: ''
 											}`}
 										>
 											{item}
-										</a>
-									</motion.li>
-								)
-						  })
-						: ['Beranda', 'Fitur', 'Kontak', 'Tentang'].map((item) => {
-								const itemPath =
-									item === 'Beranda' ? '/' : `/${item.toLowerCase()}`
-								return (
-									<motion.li
-										key={item}
-										initial="hidden"
-										animate="visible"
-										variants={itemVariants}
+										</button>
+										<DropdownMenu isOpen={isDropdownOpen} />
+									</div>
+								) : (
+									<a
+										href={itemPath}
+										className={`transition-all hover:font-semibold hover:cursor-pointer ${
+											pathname.startsWith(itemPath)
+												? 'bg-gradient-to-r from-[#FFB526] to-[#FF8E26] rounded-full px-4 py-2 text-white font-semibold'
+												: ''
+										}`}
 									>
-										<a
-											href={itemPath}
-											className={`transition-all hover:font-semibold hover:cursor-pointer ${
-												pathname === itemPath
-													? 'bg-gradient-to-r from-[#FFB526] to-[#FF8E26] rounded-full px-4 py-2 text-white font-semibold'
-													: ''
-											}`}
-										>
-											{item}
-										</a>
-									</motion.li>
-								)
-						  })}
+										{item}
+									</a>
+								)}
+							</motion.li>
+						)
+					})}
 				</ul>
 				<div className="absolute right-0 hidden md:flex items-center space-x-4 pr-4">
 					<select
