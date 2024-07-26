@@ -28,7 +28,7 @@ const menuItems = {
 	ID: ['Beranda', 'Fitur', 'Kontak', 'Tentang'],
 }
 
-const paths = ['home', 'features', 'contact', 'about']
+const paths = ['', 'features', 'contact', 'about']
 
 const itemVariants = {
 	hidden: { opacity: 0, y: 20 },

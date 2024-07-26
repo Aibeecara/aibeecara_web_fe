@@ -1,5 +1,6 @@
 // src/pages/DeleteAccount.js
 import React from 'react'
+import { Helmet } from 'react-helmet'
 
 const DeleteAccount = () => {
 	return (
@@ -60,6 +61,13 @@ const DeleteAccount = () => {
 					.
 				</p>
 			</div>
+      <Helmet>
+        <title>Penghapusan Akun - aibeecara</title>
+        <meta
+          name="description"
+          content="Panduan penghapusan akun dan data terkait di aplikasi aibeecara."
+        />
+      </Helmet>
 		</div>
 	)
 }
