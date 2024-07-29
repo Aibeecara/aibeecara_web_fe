@@ -39,10 +39,15 @@ const PopUpDownload = ({ closeModal }) => {
 						? 'Click the button below to download our app and start your journey towards effective language learning.'
 						: 'Klik tombol di bawah untuk mengunduh aplikasi kami dan mulai perjalanan Anda'}
 				</p>
-				<p className="text-red-600 mb-6 text-center font-bold p-4 rounded-xl border-2 border-red-500 border-dashed bg-red-100">
+				<p className="text-red-600 mb-4 text-center font-bold p-4 rounded-xl border-2 border-red-500 border-dashed bg-red-100">
 					{language === 'EN'
-						? 'Note: The app is currently in alpha testing phase.'
-						: 'Catatan: Saat ini, aplikasi sedang dalam tahap pengujian alpha'}
+						? 'Note: The app is currently in development stage, there might be bugs.'
+						: 'Catatan: Saat ini, aplikasi sedang dalam tahap pengembangan, terdapat kemungkinan bug.'}
+				</p>
+				<p className="text-orange-600 mb-6 text-center font-bold p-4 rounded-xl border-2 border-orange-500 border-dashed bg-orange-100">
+					{language === 'EN'
+						? 'Version: v0.30.07-alpha (July 30, 2024)'
+						: 'Versi: v0.30.07-alpha (30 Juli 2024)'}
 				</p>
 				<div className="flex justify-center">
 					<a
