@@ -51,7 +51,7 @@ const PopUpDownload = ({ closeModal }) => {
 				</p>
 				<div className="flex justify-center">
 					<a
-						href="https://github.com/Aibeecara/aibeecara_web_fe/releases/download/v0.30.07-alpha/aibeecara-v30-alpha.apk"
+						// href="https://github.com/Aibeecara/aibeecara_web_fe/releases/download/v0.30.07-alpha/aibeecara-v30-alpha.apk"
 						download
 						className="bg-[#FFB526] text-white px-6 py-3 rounded-full font-bold shadow-lg transition-transform duration-300 hover:scale-105"
 					>
