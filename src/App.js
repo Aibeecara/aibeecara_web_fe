@@ -9,18 +9,20 @@ import QRCodeGenerator from './pages/QRCode'
 import { useLanguage } from './contexts/LanguageContext'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import DeleteAccount from './pages/DeleteAccount'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 
 function App() {
-  const { language } = useLanguage()
+	const { language } = useLanguage()
 
 	return (
 		<Router>
+			<SpeedInsights />
 			<NavBar />
 			<Routes>
 				<Route path="/" element={<LandingPage />} />
 				<Route path="*" element={<ComingSoon />} />
-        <Route path="/about/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/about/account-deletion" element={<DeleteAccount />} />
+				<Route path="/about/privacy-policy" element={<PrivacyPolicy />} />
+				<Route path="/about/account-deletion" element={<DeleteAccount />} />
 				<Route path="/" element={<QRCodeGenerator />} />
 			</Routes>
 			<Footer />
