@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet'
 import { BsAndroid } from 'react-icons/bs'
 import { useLanguage } from '../contexts/LanguageContext'
 import PopUpDownload from '../components/PopUpDownload'
+import { BiLogoPlayStore } from 'react-icons/bi'
 
 const Home = () => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -66,13 +67,13 @@ const Home = () => {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 1.5 }}
 				>
-					<button
-						onClick={openModal}
+					<a
+						href='https://play.google.com/store/apps/details?id=com.aibeecara.app'
 						className="px-6 py-3 bg-gradient-to-r from-[#FFB526] to-[#FF8E26] hover:bg-[#d4a13b] rounded-full text-xl font-bold text-white cursor-pointer transition-all duration-300 flex items-center"
 					>
 						{language === 'EN' ? 'Download Now' : 'Unduh Sekarang'}
-						<BsAndroid size={20} className="ml-2" />
-					</button>
+						<BiLogoPlayStore size={20} className="ml-2" />
+					</a>
 				</motion.div>
 				{/* <a
 					href="#about"

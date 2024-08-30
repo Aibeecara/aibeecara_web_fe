@@ -9,6 +9,7 @@ import { BsAndroid } from 'react-icons/bs'
 import { useLanguage } from '../contexts/LanguageContext'
 import PopUpDownload from './PopUpDownload'
 import DropdownMenu from './DropdownMenu' // Import the new DropdownMenu component
+import { BiLogoPlayStore } from 'react-icons/bi'
 
 const menuVariants = {
 	open: {
@@ -164,7 +165,7 @@ export default function Navbar() {
 						className="w-28 cursor-pointer"
 					/>
 				</a>
-				<ul
+				{/* <ul
 					className="hidden md:flex space-x-8 justify-center absolute items-center transition-all"
 					style={{ right: '50%', transform: 'translateX(50%)' }}
 				>
@@ -209,7 +210,7 @@ export default function Navbar() {
 							</motion.li>
 						)
 					})}
-				</ul>
+				</ul> */}
 				<div className="absolute right-0 hidden md:flex items-center space-x-4 pr-4">
 					<select
 						value={language}
@@ -225,16 +226,16 @@ export default function Navbar() {
 						animate="visible"
 						className="flex justify-center items-center"
 					>
-						<button
-							onClick={openModal}
+						<a
+							href='https://play.google.com/store/apps/details?id=com.aibeecara.app'
 							className="px-4 py-2 bg-gradient-to-r from-[#FFB526] to-[#FF8E26] hover:bg-[#d4a13b] rounded-full text-lg font-bold text-white cursor-pointer transition-all duration-300 flex items-center"
 						>
 							{language === 'EN' ? 'Download' : 'Unduh'}
-							<BsAndroid size={20} className="ml-2" />
-						</button>
+							<BiLogoPlayStore size={20} className="ml-2" />
+						</a>
 					</motion.li>
 				</div>
-				<div className="flex items-center md:hidden">
+				{/* <div className="flex items-center md:hidden">
 					<button
 						className="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 rounded-full text-xl p-2"
 						onClick={handleMenuToggle}
@@ -245,7 +246,7 @@ export default function Navbar() {
 							<FaBars style={{ color: 'black' }} />
 						)}
 					</button>
-				</div>
+				</div> */}
 			</div>
 
 			{isOpen && <PopUpDownload closeModal={closeModal} />}
